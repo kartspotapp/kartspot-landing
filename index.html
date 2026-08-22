@@ -64,30 +64,51 @@
     color:var(--text);width:40px;height:38px;font-size:18px;cursor:pointer;}
 
   /* hero */
-  header{position:relative;text-align:center;overflow:hidden;
-    padding:clamp(64px,9vw,104px) 0 clamp(40px,5vw,60px);}
-  header:before{content:'';position:absolute;inset:0;pointer-events:none;background:
-    radial-gradient(56% 52% at 50% -4%, rgba(255,61,51,0.10), transparent 62%),
-    radial-gradient(70% 60% at 50% 0%, rgba(255,255,255,0.045), transparent 70%);}
-  header .wrap{position:relative;}
+  .hero{position:relative;min-height:100vh;display:flex;flex-direction:column;overflow:hidden;text-align:center;}
+  .hero .bg{position:absolute;inset:0;background:url("/hero.jpg") center 40%/cover no-repeat;
+    transform:scale(1.08);filter:blur(6px) brightness(.86) saturate(.95);}
+  .hero .veil{position:absolute;inset:0;background:
+    radial-gradient(1200px 560px at 50% 0%, rgba(255,61,51,0.15), transparent 60%),
+    radial-gradient(900px 520px at 50% 48%, rgba(0,0,0,0.5), transparent 72%),
+    linear-gradient(180deg, rgba(10,10,11,0.82) 0%, rgba(10,10,11,0.5) 22%, rgba(10,10,11,0.55) 56%, rgba(10,10,11,0.98) 100%);}
+  .hero-content{position:relative;z-index:1;flex:1;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;padding:clamp(110px,15vw,150px) 0 clamp(56px,7vw,84px);}
   .eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);
     font-size:12px;font-weight:500;letter-spacing:2px;color:var(--muted);
     text-transform:uppercase;margin-bottom:22px;
     border:1px solid var(--line);border-radius:999px;padding:6px 14px;}
-  .eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--red);
+  .eyebrow .dot,.works-line .dot{width:7px;height:7px;border-radius:50%;background:var(--red);
     box-shadow:0 0 0 0 rgba(255,61,51,0.5);animation:pulse 2.4s infinite;}
   @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(255,61,51,0.5);}70%{box-shadow:0 0 0 7px rgba(255,61,51,0);}100%{box-shadow:0 0 0 0 rgba(255,61,51,0);}}
   h1{font-family:var(--head);font-weight:700;font-size:clamp(38px,6vw,66px);
     line-height:1.02;letter-spacing:-2px;max-width:15ch;margin:0 auto 22px;}
+  .hero h1{font-weight:800;color:#fff;font-size:clamp(42px,7.2vw,82px);max-width:16ch;}
   .sub{font-size:clamp(16px,1.7vw,19px);color:var(--muted);max-width:60ch;
     margin:0 auto 32px;line-height:1.6;}
   .cta-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:18px;}
-  .trial{font-size:13.5px;color:var(--muted);margin-bottom:18px;}
-  .howit-link{display:inline-block;font-size:13.5px;color:var(--muted);
-    border-bottom:1px solid var(--line);padding-bottom:2px;margin-bottom:18px;
-    transition:color .15s,border-color .15s;}
-  .howit-link:hover{color:var(--text);border-color:rgba(255,255,255,0.3);}
-  .meta{font-family:var(--mono);font-size:12px;color:var(--dim);letter-spacing:0.3px;}
+  .btn.red{background:var(--red);color:#fff;}
+  .btn.red:hover{background:#ff574c;}
+  .works-line{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);
+    font-size:12.5px;font-weight:500;letter-spacing:1.5px;color:var(--muted);
+    text-transform:uppercase;margin-top:8px;margin-bottom:16px;}
+  .hero-proof{font-size:13px;color:var(--dim);}
+  .hero-proof b{color:var(--text);font-weight:600;}
+
+  /* why kartspot */
+  #why{border-top:1px solid var(--line-soft);}
+  .why-inner{max-width:880px;margin:0 auto;}
+  .why-inner .sec-head{text-align:left;}
+  .why-lead{font-size:16px;color:var(--muted);line-height:1.65;max-width:70ch;margin-top:16px;}
+  .rows{border-top:1px solid rgba(255,255,255,.10);margin-top:36px;}
+  .row{display:grid;grid-template-columns:minmax(200px,33%) 1fr;gap:30px;padding:28px 2px;
+    border-bottom:1px solid rgba(255,255,255,.10);align-items:baseline;}
+  .row .claim{font-family:var(--head);font-weight:800;font-size:22px;color:#fff;letter-spacing:-0.4px;}
+  .row .claim .acc{color:var(--red);}
+  .row .desc{font-size:16px;color:#a6a9ae;line-height:1.6;}
+  .why-close{text-align:center;margin-top:48px;}
+  .why-close .label{display:block;font-family:var(--mono);font-size:12px;font-weight:700;
+    letter-spacing:2px;color:var(--red);text-transform:uppercase;margin-bottom:10px;}
+  .why-close p{font-family:var(--head);font-weight:700;font-size:20px;letter-spacing:-0.3px;color:var(--text);}
 
   /* board showcase */
   .showcase{margin-top:clamp(36px,5vw,56px);}
@@ -208,8 +229,11 @@
     .mobile-row{gap:32px;}
     .mobile-copy{text-align:center;}
     .mobile-copy p{margin:0 auto;}
+    .row{grid-template-columns:1fr;gap:8px;padding:22px 2px;}
   }
   @media (max-width:720px){
+    .hero-content{padding:clamp(96px,20vw,130px) 0 44px;}
+    .hero h1{font-size:clamp(34px,10vw,52px);}
     .navlinks{display:none;position:absolute;top:66px;left:0;right:0;flex-direction:column;
       align-items:stretch;gap:0;background:rgba(10,10,11,0.98);backdrop-filter:blur(14px);
       border-bottom:1px solid var(--line);padding:8px 20px 16px;}
@@ -237,20 +261,55 @@
   </div>
 </nav>
 
-<header>
-  <div class="wrap">
-    <div class="eyebrow reveal d1"><span class="dot"></span> Pit strategy · live</div>
-    <h1 class="reveal d2">Run your pit wall from any screen.</h1>
-    <p class="sub reveal d3">KartSpot is the live pit-strategy board for endurance karting teams. Assign drivers to lanes, read every team's lap quality at a glance, and manage each handover in real time — straight from your browser. Nothing to install.</p>
-    <div class="cta-row reveal d4">
-      <a href="https://my.kartspot.app/register" class="btn solid big">Get started</a>
-      <a href="#demo" class="btn ghost big">See how it works</a>
+<header class="hero">
+  <div class="bg"></div>
+  <div class="veil"></div>
+  <div class="wrap hero-content">
+    <h1 class="reveal d1">Everything you need.<br>Nothing you don't.</h1>
+    <p class="sub reveal d2">Live pit strategy for endurance karting — clean, fast, and exactly enough.</p>
+    <div class="cta-row reveal d3">
+      <a href="https://my.kartspot.app/register" class="btn red big">Start free — 30 days</a>
+      <a href="/how-it-works" class="btn ghost big">See how it works →</a>
     </div>
-    <p class="trial reveal d5">Start free — 30-day free trial for every team. No credit card required.</p>
-    <a href="/how-it-works" class="howit-link reveal d5">See how it works, step by step →</a>
-    <div class="meta reveal d6">Works with Apex Timing &amp; RaceFacer · Desktop, tablet &amp; phone · Built by racers</div>
+    <div class="works-line reveal d4"><span class="dot"></span> Works with Apex Timing &amp; RaceFacer</div>
+    <p class="hero-proof reveal d5">Proven at <b>some of the biggest races ever hosted</b> · No credit card required</p>
   </div>
 </header>
+
+<!-- Why KartSpot -->
+<section id="why">
+  <div class="wrap">
+    <div class="why-inner">
+      <div class="sec-head reveal d1">
+        <div class="eyebrow"><span class="dot"></span> Why KartSpot</div>
+        <h2>Simple where it counts.</h2>
+        <p class="why-lead">Other tools bury you in data and color. KartSpot shows you exactly what decides the race — no clutter, no menus to dig through mid-stint. Just the numbers that call it, the instant you glance down.</p>
+      </div>
+      <div class="rows">
+        <div class="row reveal d1">
+          <div class="claim">Apex <span class="acc">and</span> RaceFacer</div>
+          <div class="desc">The only strategy tool that reads both. Wherever you race, KartSpot's already there — nobody else does both.</div>
+        </div>
+        <div class="row reveal d2">
+          <div class="claim">Real pace, at a glance</div>
+          <div class="desc">Best lap, clean average, pit status — the truth, read in a second. No AI guessing, just what's happening on track.</div>
+        </div>
+        <div class="row reveal d3">
+          <div class="claim">Runs from your phone</div>
+          <div class="desc">Send your crew a link and they run the pit board from their phones — feeding your strategy live. No laptop on the wall.</div>
+        </div>
+        <div class="row reveal d4">
+          <div class="claim">Proven on <span class="acc">60+</span> grids</div>
+          <div class="desc">Battle-tested in real endurance racing, at some of the biggest grids ever hosted. Not a demo — the real thing.</div>
+        </div>
+      </div>
+      <div class="why-close reveal d5">
+        <span class="label">Pricing</span>
+        <p>One flat price. Race all season — no per-race fees.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- Board showcase -->
 <section id="demo" style="padding-top:0;">
