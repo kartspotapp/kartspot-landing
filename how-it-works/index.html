@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How it works — KartSpot</title>
+<meta name="description" content="KartSpot plugs into your race's live timing and turns it into a real-time strategy board — for the whole team. See how it works, step by step.">
+<link rel="icon" type="image/png" href="/kartspot-logo.png">
+<meta property="og:title" content="How it works — KartSpot">
+<meta property="og:description" content="KartSpot plugs into your race's live timing and turns it into a real-time strategy board — for the whole team.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://kartspot.app/how-it-works">
+<meta name="theme-color" content="#000000">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#000000; --panel:#0e0e10; --panel-2:#161619; --nested:#0a0a0b;
+    --line:rgba(255,255,255,0.09); --line-soft:rgba(255,255,255,0.055);
+    --text:#f4f4f6; --muted:#9a9aa0; --dim:#5f5f66;
+    --head:'Space Grotesk',-apple-system,'SF Pro Display',system-ui,sans-serif;
+    --mono:'JetBrains Mono',ui-monospace,monospace;
+    --body:-apple-system,'SF Pro Display',system-ui,Inter,sans-serif;
+    --w:1140px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);color:var(--text);font-family:var(--body);
+    line-height:1.5;-webkit-font-smoothing:antialiased;letter-spacing:-0.2px;
+    overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none;}
+  .wrap{width:var(--w);max-width:calc(100% - 40px);margin:0 auto;}
+  .tag{font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:2px;
+    color:var(--muted);text-transform:uppercase;}
+  h2{font-family:var(--head);font-weight:700;font-size:clamp(28px,3.7vw,44px);
+    line-height:1.06;letter-spacing:-1.2px;}
+  .sec-head{margin-bottom:44px;}
+  .sec-head .tag{display:block;margin-bottom:14px;}
+  .sec-head.center{text-align:center;}
+  section{padding:clamp(56px,7vw,96px) 0;scroll-margin-top:80px;}
+
+  /* nav (same as index.html) */
+  nav{position:sticky;top:0;z-index:50;background:rgba(0,0,0,0.72);
+    backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--line-soft);}
+  .nav-in{display:flex;align-items:center;justify-content:space-between;height:66px;}
+  .brand img{height:40px;width:auto;display:block;}
+  .navlinks{display:flex;align-items:center;gap:26px;}
+  .navlinks .link{font-size:14px;color:var(--muted);transition:color .15s;}
+  .navlinks .link:hover,.navlinks .link.active{color:var(--text);}
+  .btn{display:inline-flex;align-items:center;justify-content:center;
+    font-family:var(--body);font-size:14px;font-weight:600;border-radius:10px;
+    padding:10px 18px;cursor:pointer;border:1px solid transparent;transition:transform .12s,background .15s,border-color .15s;white-space:nowrap;}
+  .btn:active{transform:translateY(1px);}
+  .btn.solid{background:var(--text);color:#0a0a0a;}
+  .btn.solid:hover{background:#ffffff;}
+  .btn.ghost{background:transparent;color:var(--text);border-color:var(--line);}
+  .btn.ghost:hover{border-color:rgba(255,255,255,0.3);}
+  .btn.big{padding:13px 26px;font-size:15px;border-radius:11px;}
+  .burger{display:none;background:none;border:1px solid var(--line);border-radius:9px;
+    color:var(--text);width:40px;height:38px;font-size:18px;cursor:pointer;}
+
+  /* page header — monochrome, no accent color */
+  header{position:relative;text-align:center;overflow:hidden;
+    padding:clamp(56px,8vw,88px) 0 clamp(32px,4vw,48px);}
+  header:before{content:'';position:absolute;inset:0;pointer-events:none;background:
+    radial-gradient(70% 60% at 50% 0%, rgba(255,255,255,0.05), transparent 70%);}
+  header .wrap{position:relative;}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);
+    font-size:12px;font-weight:500;letter-spacing:2px;color:var(--muted);
+    text-transform:uppercase;margin-bottom:22px;
+    border:1px solid var(--line);border-radius:999px;padding:6px 14px;}
+  .eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--text);
+    box-shadow:0 0 0 0 rgba(244,244,246,0.5);animation:pulse 2.4s infinite;}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(244,244,246,0.4);}70%{box-shadow:0 0 0 7px rgba(244,244,246,0);}100%{box-shadow:0 0 0 0 rgba(244,244,246,0);}}
+  h1{font-family:var(--head);font-weight:700;font-size:clamp(34px,5.4vw,58px);
+    line-height:1.04;letter-spacing:-2px;max-width:18ch;margin:0 auto 20px;}
+  .sub{font-size:clamp(16px,1.7vw,19px);color:var(--muted);max-width:64ch;
+    margin:0 auto 8px;line-height:1.6;}
+  @media (prefers-reduced-motion: reduce){
+    .eyebrow .dot{animation:none;}
+    html{scroll-behavior:auto;}
+  }
+
+  /* live-board mockup — monochrome */
+  .board-mock{background:var(--panel);border:1px solid var(--line);border-radius:16px;
+    padding:20px;overflow:hidden;box-shadow:0 40px 90px -40px rgba(0,0,0,0.9);}
+  .board-mock-head{display:flex;align-items:center;justify-content:space-between;
+    gap:12px;padding:2px 4px 16px;flex-wrap:wrap;}
+  .live-badge{display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);
+    font-size:12px;font-weight:600;letter-spacing:0.5px;color:var(--text);
+    text-transform:uppercase;}
+  .live-dot{width:7px;height:7px;border-radius:50%;background:var(--text);
+    animation:pulse 2.4s infinite;}
+  .board-source{font-family:var(--mono);font-size:12px;color:var(--dim);letter-spacing:0.3px;}
+  .board-table-wrap{overflow-x:auto;}
+  table.board-table{width:100%;border-collapse:collapse;min-width:560px;}
+  .board-table th{text-align:left;font-family:var(--mono);font-size:11px;
+    letter-spacing:1px;text-transform:uppercase;color:var(--dim);font-weight:600;
+    padding:10px 12px;border-bottom:1px solid var(--line);white-space:nowrap;}
+  .board-table td{padding:12px;border-bottom:1px solid var(--line-soft);
+    font-size:14px;color:var(--text);white-space:nowrap;}
+  .board-table td:first-child,.board-table th:first-child{padding-left:14px;}
+  .board-table tbody tr:last-child td{border-bottom:none;}
+  .board-table .muted{color:var(--dim);font-family:var(--mono);}
+  .status-badge{display:inline-block;font-family:var(--mono);font-size:11px;
+    font-weight:600;letter-spacing:0.4px;text-transform:uppercase;color:var(--muted);
+    background:rgba(255,255,255,0.07);border:1px solid var(--line);
+    border-radius:999px;padding:3px 10px;}
+  .board-caption{color:var(--muted);font-size:14.5px;line-height:1.6;
+    margin-top:20px;text-align:center;max-width:70ch;margin-left:auto;margin-right:auto;}
+  .board-caption b{color:var(--text);font-weight:600;}
+
+  /* six steps */
+  #steps{border-top:1px solid var(--line-soft);}
+  .steps6{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  .step{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:26px;}
+  .step .n{font-family:var(--mono);font-size:13px;color:var(--dim);font-weight:700;margin-bottom:14px;}
+  .step h3{font-family:var(--head);font-weight:700;font-size:18px;letter-spacing:-0.4px;margin-bottom:8px;}
+  .step p{color:var(--muted);font-size:14.5px;line-height:1.6;}
+
+  /* feature grid */
+  #everything{border-top:1px solid var(--line-soft);}
+  .feat{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:16px;
+    padding:22px 24px;transition:border-color .18s,background .18s;}
+  .card:hover{border-color:rgba(255,255,255,0.16);background:var(--panel-2);}
+  .card h3{font-family:var(--head);font-weight:700;font-size:16.5px;letter-spacing:-0.3px;margin-bottom:8px;}
+  .card p{color:var(--muted);font-size:14px;line-height:1.55;}
+
+  /* getting started */
+  #getting-started{border-top:1px solid var(--line-soft);}
+  .gs-list{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+  .gs-item{background:var(--panel);border:1px solid var(--line);border-radius:14px;
+    padding:20px;display:flex;gap:14px;align-items:flex-start;}
+  .gs-item .n{flex:none;width:28px;height:28px;border-radius:50%;border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-family:var(--mono);
+    font-size:12px;font-weight:700;color:var(--muted);}
+  .gs-item p{font-size:14px;color:var(--text);line-height:1.5;padding-top:4px;}
+
+  /* final cta */
+  .final{border-top:1px solid var(--line-soft);}
+  .final-box{background:var(--panel);
+    border:1px solid var(--line);border-radius:22px;padding:clamp(40px,6vw,64px) 24px;text-align:center;}
+  .final-box .sub{margin:16px auto 8px;}
+  .cta-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:24px;margin-bottom:14px;}
+  .trial-note{font-size:13.5px;color:var(--muted);}
+  .guide-link{display:inline-flex;align-items:center;gap:7px;font-size:13.5px;
+    color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:2px;transition:color .15s,border-color .15s;}
+  .guide-link:hover{color:var(--text);border-color:rgba(255,255,255,0.3);}
+
+  /* footer (same as index.html) */
+  footer{border-top:1px solid var(--line-soft);padding:36px 0;}
+  .foot-in{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;}
+  .foot-brand img{height:30px;width:auto;display:block;opacity:0.9;}
+  .foot-mid{font-family:var(--mono);font-size:12px;color:var(--dim);letter-spacing:0.2px;}
+  .foot-links{display:flex;align-items:center;gap:18px;font-size:13px;color:var(--muted);}
+  .foot-links a{display:inline-flex;align-items:center;transition:color .15s;}
+  .foot-links a:hover{color:var(--text);}
+
+  /* reveal */
+  .reveal{opacity:0;transform:translateY(16px);animation:rise .7s cubic-bezier(.2,.7,.3,1) forwards;}
+  @keyframes rise{to{opacity:1;transform:none;}}
+  .d1{animation-delay:.05s;} .d2{animation-delay:.16s;} .d3{animation-delay:.27s;} .d4{animation-delay:.38s;}
+  @media (prefers-reduced-motion: reduce){.reveal{animation:none;opacity:1;transform:none;}}
+
+  /* responsive */
+  @media (max-width:900px){
+    .steps6{grid-template-columns:1fr 1fr;}
+    .feat{grid-template-columns:1fr;}
+    .gs-list{grid-template-columns:1fr 1fr;}
+  }
+  @media (max-width:720px){
+    .navlinks{display:none;position:absolute;top:66px;left:0;right:0;flex-direction:column;
+      align-items:stretch;gap:0;background:rgba(10,10,11,0.98);backdrop-filter:blur(14px);
+      border-bottom:1px solid var(--line);padding:8px 20px 16px;}
+    .navlinks.open{display:flex;}
+    .navlinks .link{padding:12px 0;border-bottom:1px solid var(--line-soft);font-size:15px;}
+    .navlinks .btn{width:100%;margin-top:10px;}
+    .burger{display:flex;align-items:center;justify-content:center;}
+    .steps6{grid-template-columns:1fr;}
+    .gs-list{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap nav-in">
+    <a href="/" class="brand" aria-label="KartSpot"><img src="/kartspot-logo.png" alt="KartSpot"></a>
+    <div class="navlinks" id="navlinks">
+      <a href="/#demo" class="link">Demo</a>
+      <a href="/#features" class="link">Features</a>
+      <a href="/#pricing" class="link">Pricing</a>
+      <a href="/how-it-works" class="link active">How it works</a>
+      <a href="https://my.kartspot.app/login" class="link">Sign in</a>
+      <a href="https://my.kartspot.app/register" class="btn solid">Get started</a>
+    </div>
+    <button class="burger" aria-label="Menu" onclick="document.getElementById('navlinks').classList.toggle('open')">☰</button>
+  </div>
+</nav>
+
+<header>
+  <div class="wrap">
+    <div class="eyebrow reveal d1"><span class="dot"></span> How it works</div>
+    <h1 class="reveal d2">Live pit strategy for endurance karting</h1>
+    <p class="sub reveal d3">KartSpot plugs into your race's live timing and turns it into a real-time strategy board — for the whole team. Read every kart's true pace, catch pit stops the instant they happen, plan your driver rotation, and put a live pit board in your crew's hands on the wall.</p>
+  </div>
+</header>
+
+<!-- Live board mockup -->
+<section style="padding-top:0;">
+  <div class="wrap">
+    <div class="board-mock reveal d4">
+      <div class="board-mock-head">
+        <span class="live-badge"><span class="live-dot"></span> Live</span>
+        <span class="board-source">Source · Apex Timing</span>
+      </div>
+      <div class="board-table-wrap">
+        <table class="board-table">
+          <thead>
+            <tr><th>Pos</th><th>Kart</th><th>Driver</th><th>Last</th><th>Best</th><th>Avg</th><th>Rating</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>7</td><td>Falcons Racing</td><td>47.812</td><td>47.640</td><td>47.9</td><td>Fast</td></tr>
+            <tr><td>2</td><td>12</td><td>Red Line Kart</td><td>47.905</td><td>47.712</td><td>48.0</td><td>Good</td></tr>
+            <tr><td>3</td><td>3</td><td>Apex Endurance</td><td class="muted">----</td><td>47.688</td><td>47.9</td><td><span class="status-badge">In pit</span></td></tr>
+            <tr><td>4</td><td>21</td><td>Night Shift</td><td>48.210</td><td>47.930</td><td>48.3</td><td>Good</td></tr>
+            <tr><td>5</td><td>5</td><td>Team Mistral</td><td>48.980</td><td>48.120</td><td>48.6</td><td><span class="status-badge">Pit out</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <p class="board-caption">A live board, mid-race — <b>Best</b> next to a clean <b>Avg</b>, a pace rating per kart, and pit stops flagged the instant they happen.</p>
+  </div>
+</section>
+
+<!-- Six steps -->
+<section id="steps">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="tag">Step by step</span>
+      <h2>From live timing to a<br>working pit strategy.</h2>
+    </div>
+    <div class="steps6">
+      <div class="step">
+        <div class="n">01</div>
+        <h3>Connect your timing</h3>
+        <p>Create an event and point it at your live feed. KartSpot works with Apex Timing and RaceFacer and reads every lap for every kart automatically: no spreadsheets, no stopwatch, no typing. Assign your karts and drivers once, and you're set for the whole race.</p>
+      </div>
+      <div class="step">
+        <div class="n">02</div>
+        <h3>Read every kart's true pace</h3>
+        <p>Raw timing is noisy: traffic, mistakes and pit laps hide real speed. KartSpot shows best lap next to a clean average, built only from laps within a second of that kart's best, so you read genuine pace and not noise. Each kart earns a pace rating once it has a few flying laps to warm up (shown as ---- until rated).</p>
+      </div>
+      <div class="step">
+        <div class="n">03</div>
+        <h3>Catch every pit stop, automatically</h3>
+        <p>The instant a kart enters the pits, KartSpot flags it as ---- so a slow in-lap never fools you. It marks the out-lap (PIT OUT) for the kart's first laps back up to speed, and keeps the long combined pit lap out of your averages, so a stop never poisons a kart's pace numbers. Detection is driven by the pit signal itself, not a guess from lap time.</p>
+      </div>
+      <div class="step">
+        <div class="n">04</div>
+        <h3>Plan your stints &amp; driver rotation</h3>
+        <p>Lay out your rotation on a shared strategy board: assign drivers to karts, follow each stint as it happens, and adjust on the fly. Everyone on the team sees the same board, updated live — no group chat, no confusion about who's next.</p>
+      </div>
+      <div class="step">
+        <div class="n">05</div>
+        <h3>Put a board in your crew's hands</h3>
+        <p>Share a link and your crew opens the mobile pit board on their phones, right on the pit wall, no login needed. They see the same live pace and pit picture you do, so a call from the stand reaches the wall instantly.</p>
+      </div>
+      <div class="step">
+        <div class="n">06</div>
+        <h3>Never lose your race</h3>
+        <p>Refresh the page, drop signal, switch device: your stints and data survive. KartSpot reconnects and picks up exactly where it left off, so you're never flying blind at the worst possible moment.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Everything in KartSpot -->
+<section id="everything">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="tag">Everything in KartSpot</span>
+      <h2>One board, the whole race.</h2>
+    </div>
+    <div class="feat">
+      <div class="card"><h3>Apex &amp; RaceFacer</h3><p>Reads your live timing automatically.</p></div>
+      <div class="card"><h3>Clean average</h3><p>True pace, traffic and pit laps filtered out.</p></div>
+      <div class="card"><h3>Automatic pit detection</h3><p>Pit-in and pit-out caught the moment they happen.</p></div>
+      <div class="card"><h3>Stints &amp; pace rating</h3><p>Every stint tracked, a pace rating per kart.</p></div>
+      <div class="card"><h3>Strategy board &amp; rotation</h3><p>Assign drivers, plan stints — the whole team in sync.</p></div>
+      <div class="card"><h3>Mobile pit board</h3><p>Share a link, your crew sees the live picture on the wall.</p></div>
+      <div class="card"><h3>Survives reconnects</h3><p>Refresh or drop out, your data stays intact.</p></div>
+      <div class="card"><h3>Real-time, for everyone</h3><p>One live picture, shared across your whole team.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Getting started -->
+<section id="getting-started">
+  <div class="wrap">
+    <div class="sec-head center">
+      <span class="tag">Getting started</span>
+      <h2>Up and running in minutes.</h2>
+    </div>
+    <div class="gs-list">
+      <div class="gs-item"><div class="n">1</div><p>Create your first event</p></div>
+      <div class="gs-item"><div class="n">2</div><p>Choose your timing source — Apex Timing or RaceFacer</p></div>
+      <div class="gs-item"><div class="n">3</div><p>Assign your karts and drivers</p></div>
+      <div class="gs-item"><div class="n">4</div><p>Open the live board — and share the mobile board with your crew</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Final CTA -->
+<section class="final">
+  <div class="wrap">
+    <div class="final-box">
+      <h2>Start free — 30-day trial for every team.</h2>
+      <p class="sub">No credit card required.</p>
+      <div class="cta-row">
+        <a href="https://my.kartspot.app/register" class="btn solid big">Get started</a>
+        <a href="/" class="btn ghost big">Back to home</a>
+      </div>
+      <p class="trial-note">
+        <a href="/how-it-works.pdf" class="guide-link">Download guide (PDF) →</a>
+      </p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-in">
+    <a href="/" class="foot-brand" aria-label="KartSpot"><img src="/kartspot-logo.png" alt="KartSpot"></a>
+    <div class="foot-mid">Built by racers · Works with Apex Timing &amp; RaceFacer</div>
+    <div class="foot-links">
+      <a href="/how-it-works">How it works</a>
+      <a href="https://my.kartspot.app/terms">Terms</a>
+      <a href="https://my.kartspot.app/privacy">Privacy</a>
+      <a href="https://www.instagram.com/kartspot.app/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="2" width="20" height="20" rx="5"/>
+          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+          <line x1="17.5" y1="6.5" x2="17.5" y2="6.5"/>
+        </svg>
+      </a>
+      <span>© 2026 KartSpot</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
